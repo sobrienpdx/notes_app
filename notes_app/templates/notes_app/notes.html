@@ -7,10 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Notes</title>
 
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-resource@1.5.1/dist/vue-resource.min.js"></script>
 
   </head>
 	<body>
 Hello, this is dog.
+<br/>
+<div id="notes_list">
+    <ol>
+        <li v-for="note in notes">${note.text}</li>
+    </ol>
+</div>
 	</body>
 {% load static %}
 <script src="{% static 'notes_app/notes.js' %}"></script>
