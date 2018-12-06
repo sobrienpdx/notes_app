@@ -12,11 +12,18 @@
 
   </head>
 	<body>
-Hello, this is dog.
+These are your notes
 <br/>
-<div id="notes_list">
+<div id="app">
+    <input
+            type="text"
+            placeholder="make a new note"
+            v-model="new_note"
+    />
+    <button @click='save_new_note'>Save</button>
     <ol>
-        <li v-for="note in notes">${note.text}</li>
+        <li v-for="note in notes"><button @click='toggle_done(note)'>Done</button>${note.text}</li>
+        <li v-if=new_note>${new_note}</li>
     </ol>
 </div>
 	</body>
