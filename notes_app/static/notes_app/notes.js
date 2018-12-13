@@ -10,6 +10,7 @@ var app = new Vue({
   data: {
     notes: "Hi",
     new_note: "",
+    show_actions_for: "",
   },
 
   methods: {
@@ -32,6 +33,24 @@ var app = new Vue({
         this.get_notes();
       })
     },
+    hide_show: function(note){
+      if(this.show_actions_for == note.url) {
+        this.show_actions_for = "";
+      } else {
+        this.show_actions_for = note.url;
+      }
+    },
+    delete_note: function(note) {
+      this.$http.delete(note.url).then((response) => {
+      let filtered = this.notes.filter(function(value, index, arr){
+        return value.url != note.url;
+      });
+      this.notes = filtered;
+        //for(i = 0; i < this.notes.length; i++){
+        //  if this.notes[i].url ==
+        //}
+      })
+    }
   },
   mounted: function(){
     this.get_notes();
