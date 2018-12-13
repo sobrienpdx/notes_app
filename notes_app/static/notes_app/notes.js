@@ -1,14 +1,17 @@
 var app = new Vue({
   el: '#app',
   delimiters: ['${', '}'],
-  data: {
-    notes: "Hi",
-    new_note: "",
-  },
   http: {
     root: '',
     headers: {},
   },
+
+
+  data: {
+    notes: "Hi",
+    new_note: "",
+  },
+
   methods: {
     get_notes: function(){
       this.$http.get('/api/notes').then((response) => {
@@ -24,7 +27,7 @@ var app = new Vue({
     toggle_done: function(note_obj){
       console.log("trying to update " + note_obj)
       console.log("note url: " + note_obj.url)
-      this.$http.patch(note_obj.url, {text: "we totes edited this"}).then((response) => {
+      this.$http.patch(note_obj.url, {"is_done": !note_obj.is_done}).then((response) => {
         console.log("we got: " + response.body)
         this.get_notes();
       })
