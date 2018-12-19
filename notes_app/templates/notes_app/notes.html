@@ -21,8 +21,9 @@ These are your notes
             v-model="new_note"
     />
     <button @click='save_new_note'>Save</button>
+    <input type="text" placeholder="Search Notes" v-model="search_input" v-on:keyup="search_notes"/>
     <ol>
-        <li v-for="note in notes">
+        <li v-for="note in display_notes">
           <strike v-if=note.is_done>${note.text}</strike>
 	  <span v-if='show_edit_box==note.url'><input type=text v-model=edited_note></input></span>
           <span v-else>${note.text}</span>

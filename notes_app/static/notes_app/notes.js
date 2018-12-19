@@ -8,18 +8,21 @@ var app = new Vue({
 
 
   data: {
-    notes: "Hi",
+    master_notes: "Hi",
+    display_notes: "Hi",
     new_note: "",
     show_actions_for: "",
     test: "hi",
     show_edit_box: "",
     edited_note: "",
+    search_input: "",
   },
 
   methods: {
     get_notes: function(){
       this.$http.get('/api/notes').then((response) => {
-        this.notes = response.body;
+        this.master_notes = response.body;
+        this.display_notes = response.body;
       });
     },
     save_new_note: function(){
@@ -45,10 +48,10 @@ var app = new Vue({
     },
     delete_note: function(note) {
       this.$http.delete(note.url).then((response) => {
-      let filtered = this.notes.filter(function(value, index, arr){
+      let filtered = this.master_notes.filter(function(value, index, arr){
         return value.url != note.url;
       });
-      this.notes = filtered;
+      this.master_notes = filtered;
         //for(i = 0; i < this.notes.length; i++){
         //  if this.notes[i].url ==
         //}
@@ -66,6 +69,14 @@ var app = new Vue({
           this.show_edit_box = "";
           this.show_actions_for = "";
       })
+    },
+    search_notes: function(){
+        let search_input = this.search_input;
+        this.display_notes = this.master_notes.filter(function(el){
+            if(el.text.includes(search_input)){
+                return el;
+            }
+	});
     }
   },
   mounted: function(){
