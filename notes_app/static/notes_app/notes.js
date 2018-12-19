@@ -11,6 +11,7 @@ var app = new Vue({
     notes: "Hi",
     new_note: "",
     show_actions_for: "",
+    test: "hi",
   },
 
   methods: {

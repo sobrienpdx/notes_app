@@ -22,7 +22,10 @@ These are your notes
     />
     <button @click='save_new_note'>Save</button>
     <ol>
-        <li v-for="note in notes"><strike v-if=note.is_done>${note.text}</strike><span v-else>${note.text}</span>
+        <li v-for="note in notes">
+          <strike v-if=note.is_done>${note.text}</strike>
+          <span v-if=test>Hooray!</span>
+          <span v-else>${note.text}</span>
           <button @click='hide_show(note)'>Actions</button>
           <span v-if='show_actions_for==note.url'>
             <button @click='toggle_done(note)'>Done</button>
