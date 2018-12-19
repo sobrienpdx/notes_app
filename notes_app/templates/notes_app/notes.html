@@ -11,7 +11,7 @@
 <script src="https://unpkg.com/vue-resource@1.5.1/dist/vue-resource.min.js"></script>
 
   </head>
-	<body>
+<body>
 These are your notes
 <br/>
 <div id="app">
@@ -24,13 +24,14 @@ These are your notes
     <ol>
         <li v-for="note in notes">
           <strike v-if=note.is_done>${note.text}</strike>
-          <span v-if=test>Hooray!</span>
+	  <span v-if='show_edit_box==note.url'><input type=text v-model=edited_note></input></span>
           <span v-else>${note.text}</span>
-          <button @click='hide_show(note)'>Actions</button>
+          <button @click='hide_show(note)' v-if='show_edit_box==""'>Actions</button>
           <span v-if='show_actions_for==note.url'>
-            <button @click='toggle_done(note)'>Done</button>
-            <button>Edit</button>
-            <button @click='delete_note(note)'>Delete</button>
+            <button @click='toggle_done(note)' v-if='show_edit_box==""'>Done</button>
+	    <button @click='initialize_edit(note)' v-if='show_edit_box==""'>Edit</button>
+	    <button @click='save_edit(note)' v-else>Save</button>
+            <button @click='delete_note(note)' v-if='show_edit_box==""'>Delete</button>
           </span>
 
         </li>

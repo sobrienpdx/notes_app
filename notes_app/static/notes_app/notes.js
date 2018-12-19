@@ -12,6 +12,8 @@ var app = new Vue({
     new_note: "",
     show_actions_for: "",
     test: "hi",
+    show_edit_box: "",
+    edited_note: "",
   },
 
   methods: {
@@ -50,6 +52,19 @@ var app = new Vue({
         //for(i = 0; i < this.notes.length; i++){
         //  if this.notes[i].url ==
         //}
+      })
+    },
+    initialize_edit: function(note) {
+	console.log("setting this.show_edit_box to " + note.url);
+	this.edited_note = note.text;
+        this.show_edit_box = note.url;
+    },
+    save_edit: function(note){
+      this.$http.patch(note.url, {"text": this.edited_note}).then((response) => {
+          note.text = this.edited_note;
+          this.edited_note = "";
+          this.show_edit_box = "";
+          this.show_actions_for = "";
       })
     }
   },
